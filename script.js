@@ -36,24 +36,65 @@ let PlayerDirectionX = "right"
 
 let playerSpeed = 10;
 
+const arrowKeys = {
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false,
+};
+
 document.addEventListener("keydown", (event) => {
-    event.preventDefault()
-    if (event.key === "ArrowUp") {
-        player.y -= player.speed;
-        console.log("UP");
-    } else if (event.key === "ArrowDown") {
-        player.y += player.speed;
-        console.log("Down");
-    } else if (event.key === "ArrowLeft") {
-        player.x -= player.speed;
-        console.log("Left");
-    } else if (event.key === "ArrowRight") {
-        player.x += player.speed;
-        console.log("Right");
+    if (event.key in arrowKeys) {
+        arrowKeys[event.key] = true;
+        event.preventDefault()
     }
-    player.element.style.top = `${player.y}px`;
-    player.element.style.left = `${player.x}px`;
 });
 
+document.addEventListener("keyup", (event) => {
+    if (event.key in arrowKeys) {
+        arrowKeys[event.key] = false;
+    }
+});
+
+function updatePlayerPosition() {
+    if (arrowKeys.ArrowUp && arrowKeys.ArrowRight) {
+        // Move diagonally up-right
+        player.y -= player.speed;
+        player.x += player.speed;
+    } else if (arrowKeys.ArrowUp && arrowKeys.ArrowLeft) {
+        // Move diagonally up-left
+        player.y -= player.speed;
+        player.x -= player.speed;
+    } else if (arrowKeys.ArrowDown && arrowKeys.ArrowRight) {
+        // Move diagonally down-right
+        player.y += player.speed;
+        player.x += player.speed;
+    } else if (arrowKeys.ArrowDown && arrowKeys.ArrowLeft) {
+        // Move diagonally down-left
+        player.y += player.speed;
+        player.x -= player.speed;
+    } else if (arrowKeys.ArrowUp) {
+        // Move up
+        player.y -= player.speed;
+    } else if (arrowKeys.ArrowDown) {
+        // Move down
+        player.y += player.speed;
+    } else if (arrowKeys.ArrowLeft) {
+        // Move left
+        player.x -= player.speed;
+    } else if (arrowKeys.ArrowRight) {
+        // Move right
+        player.x += player.speed;
+    }
+
+    player.element.style.top = `${player.y}px`;
+    player.element.style.left = `${player.x}px`;
+    
+}
+
+
+setInterval(updatePlayerPosition, 1000 / 60); 
+// Call updatePlayerPosition in a loop to continuously update the player's position
+// 60 FPS update rate
 let animationId;
 
