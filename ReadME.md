@@ -7,4 +7,5 @@
 
 # BackLog
 # add level background image changes with score and increase difficulty 
+# add player / demon interaction 
 # add abilities or powerups if possible
