@@ -1,30 +1,27 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Samurai Vs Demons</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <script src="script.js"></script>
-        <script src="Classes.js" ></script>
-
-
-        <div id="menu">
-            <h1>Game Menu</h1>
-            <div class="button-container">
-                <button id="startButton">Start Game</button>
-                <button id="exitButton">Exit Game</button>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Samurai Vs Demons</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="menu">
+        <h1>Game Menu</h1>
+        <div class="button-container">
+            <button id="startButton">Start Game</button>
+            <button id="exitButton">Exit Game</button>
         </div>
-        <div id="game" style="display: none;">
+    </div>
 
-        <div id="Board">
-            <div id="Player"></div>
-        </div>
-    </body>
+    <div id="board">
+        <div id="player"></div>
+    </div>
+
+    <script src="Classes.js"></script> <!-- Make sure this is included if necessary -->
+    <script src="script.js"></script>
+</body>
 </html>

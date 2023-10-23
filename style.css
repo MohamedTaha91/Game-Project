@@ -23,8 +23,33 @@ color:bisque
     gap: 50px; 
 }
 
+#board{
+position: relative;
+display:none;
+height:80vh;
+width: 50vw;
+background-color:grey;
+border: 6px solid white;
+margin: 0 auto; 
+margin-top: 30vh;
+
+}
+
 button {
     margin-top: 20px;
     height:100px;
     width: 120px; 
+}
+
+#player {
+    background-image: url(./Game-project-planning/samurai-avatar.png);
+    width: 13%;
+    height: 13%;
+    position: absolute;
+    left:auto;
+    right: auto;
+    top: 20px;
+    bottom: auto;
+    background-size: 120px;
+    
 }
