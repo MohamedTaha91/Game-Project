@@ -1,38 +1,65 @@
 // Logic/modification for the Menu
 const menu = document.getElementById("menu")
 const body = document.querySelector("body")
+const game = new Game();
 let boardWidth;
 let boardHeight;
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
     const exitButton = document.getElementById("exitButton");
     const menu = document.getElementById("menu");
     const board = document.getElementById("board");
-    
 
-    startButton.addEventListener("click", function() {
+
+    startButton.addEventListener("click", function () {
         // Hide the menu and show the game content
+        setInterval(() => {
+            createDemon()
+        }, 2000);
         menu.style.display = "none";
         board.style.display = "block";
         boardWidth = document.getElementById("board").clientWidth
         boardHeight = document.getElementById("board").clientHeight;
     });
 
-    exitButton.addEventListener("click", function() {
+    exitButton.addEventListener("click", function () {
         document.body.innerHTML = "<h1>Thank you for playing!</h1>";
         //Thank you for playing!
     });
 });
 
 const player = new Player();
-const game = new Game();
 
-//assigning board elements to variables to be the size of the client.
+const board = document.getElementById("board");
+
+function setDemonPosition() {
+    game.demonArray.forEach((demon)=>{
+        demon.moveDemon();
+        if (demon.x <= 0) {
+            demon.element.remove()
+        } if (demon.y >= boardHeight - demon.element.clientWidth) {
+        }
+    })
+}
+
+
+setInterval(setDemonPosition, 1000 / 60);
+
+
+
+function createDemon() {
+    const createNewDemon = document.createElement("div")
+    createNewDemon.classList.add("demon")
+    const demon = new Demon(createNewDemon);
+    game.demonArray.push(demon)
+    board.appendChild(createNewDemon);
+}
+
 
 
 const boardElement = document.getElementById("board");
 
-let  playerPositionX = 0;
+let playerPositionX = 0;
 let playerPositionY = 0;
 
 let playerDirectionY = "down"
@@ -61,19 +88,19 @@ document.addEventListener("keyup", (event) => {
 });
 
 function updatePlayerPosition() {
-   
-    if (player.y <=0 ){
+
+    if (player.y <= 0) {
         player.y = 0;
-    }if (player.x <= 0){
+    } if (player.x <= 0) {
         player.x = 0;
-        
-    } if (player.x  >= boardWidth - player.element.clientWidth){
+
+    } if (player.x >= boardWidth - player.element.clientWidth) {
         console.log("this should be on right");
         player.x = boardWidth - player.element.clientWidth
-    }   if(player.y >= boardHeight - player.element.clientWidth){
+    } if (player.y >= boardHeight - player.element.clientWidth) {
         player.y = boardHeight - player.element.clientWidth
     }
-    
+
 
     if (arrowKeys.ArrowUp && arrowKeys.ArrowRight) {
         // Move diagonally up-right
@@ -107,12 +134,12 @@ function updatePlayerPosition() {
 
     player.element.style.top = `${player.y}px`;
     player.element.style.left = `${player.x}px`;
-    
+
 }
 
 
 
-setInterval(updatePlayerPosition, 1000 / 60); 
+setInterval(updatePlayerPosition, 1000 / 60);
 // Call updatePlayerPosition in a loop to continuously update the player's position
 // 60 FPS update rate
 let animationId;

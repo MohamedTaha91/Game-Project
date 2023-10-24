@@ -53,3 +53,14 @@ button {
     background-size: 120px;
     
 }
+
+.demon {
+    background-image: url("./Game-project-planning/Demon-avatar1.png");
+    width: 12%;
+    height: 12%;
+    position: absolute;
+    left: 210px;
+    top: 20px;
+    bottom: auto;
+    background-size: 120px;
+}
