@@ -57,6 +57,17 @@ document.addEventListener("keyup", (event) => {
 });
 
 function updatePlayerPosition() {
+    if (player.y <=0 ){
+        player.y = 0;
+        console.log("this should be on top");
+    }if (player.x <= 0){
+        player.x = 0;
+        console.log("this should be on top");
+    }    
+    if (player.y <= boardHeight){
+        player.y = boardHeight
+    }
+
     if (arrowKeys.ArrowUp && arrowKeys.ArrowRight) {
         // Move diagonally up-right
         player.y -= player.speed;
