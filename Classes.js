@@ -14,5 +14,6 @@ class Player {
         this.y = 0;
         this.speed = 10; 
         this.element = document.getElementById("player");
+        
     }
 }

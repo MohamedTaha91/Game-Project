@@ -1,6 +1,8 @@
 // Logic/modification for the Menu
 const menu = document.getElementById("menu")
 const body = document.querySelector("body")
+let boardWidth;
+let boardHeight;
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("startButton");
     const exitButton = document.getElementById("exitButton");
@@ -12,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // Hide the menu and show the game content
         menu.style.display = "none";
         board.style.display = "block";
+        boardWidth = document.getElementById("board").clientWidth
+        boardHeight = document.getElementById("board").clientHeight;
     });
 
     exitButton.addEventListener("click", function() {
@@ -24,8 +28,8 @@ const player = new Player();
 const game = new Game();
 
 //assigning board elements to variables to be the size of the client.
-const boardWidth = document.getElementById("board").clientWidth;
-const boardHeight = document.getElementById("board").clientHeight;
+
+
 const boardElement = document.getElementById("board");
 
 let  playerPositionX = 0;
@@ -57,16 +61,19 @@ document.addEventListener("keyup", (event) => {
 });
 
 function updatePlayerPosition() {
+   
     if (player.y <=0 ){
         player.y = 0;
-        console.log("this should be on top");
     }if (player.x <= 0){
         player.x = 0;
-        console.log("this should be on top");
-    }    
-    if (player.y <= boardHeight){
-        player.y = boardHeight
+        
+    } if (player.x  >= boardWidth - player.element.clientWidth){
+        console.log("this should be on right");
+        player.x = boardWidth - player.element.clientWidth
+    }   if(player.y >= boardHeight - player.element.clientWidth){
+        player.y = boardHeight - player.element.clientWidth
     }
+    
 
     if (arrowKeys.ArrowUp && arrowKeys.ArrowRight) {
         // Move diagonally up-right
@@ -102,6 +109,7 @@ function updatePlayerPosition() {
     player.element.style.left = `${player.x}px`;
     
 }
+
 
 
 setInterval(updatePlayerPosition, 1000 / 60); 
