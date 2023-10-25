@@ -28,10 +28,12 @@ position: relative;
 display:none;
 height:80vh;
 width: 50vw;
-background-color:grey;
+background-image: url("./Game-project-planning/Board-1.gif");
 border: 6px solid white;
 margin: 0 auto; 
 margin-top: 30vh;
+background-size: cover;
+background-position: center center;
 
 }
 
@@ -63,6 +65,7 @@ button {
     top: 20px;
     bottom: auto;
     background-size: 120px;
+    
 }
 
 #score{
@@ -71,6 +74,8 @@ button {
     height: 100px;
     right: 0px;
     font-size: 27px;
+    color:white;
+    font-style: oblique;
 }
 
 #health{
