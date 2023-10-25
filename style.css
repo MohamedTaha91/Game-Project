@@ -64,3 +64,11 @@ button {
     bottom: auto;
     background-size: 120px;
 }
+
+#score{
+    position:absolute;
+    width: 100px;
+    height: 100px;
+    right: 0px;
+    font-size: 27px;
+}

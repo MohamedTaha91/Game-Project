@@ -4,6 +4,8 @@ const body = document.querySelector("body")
 const game = new Game();
 let boardWidth;
 let boardHeight;
+let animationId;
+let start = true
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
     const exitButton = document.getElementById("exitButton");
@@ -31,12 +33,15 @@ document.addEventListener("DOMContentLoaded", function () {
 const player = new Player();
 
 const board = document.getElementById("board");
-
+let score = 0;
 function setDemonPosition() {
-    game.demonArray.forEach((demon)=>{
+    game.demonArray.forEach((demon) => {
         demon.moveDemon();
         if (demon.x <= 0) {
             demon.element.remove()
+            game.demonArray.shift()
+            score += 10;
+            document.getElementById("score").innerText = score;
         } if (demon.y >= boardHeight - demon.element.clientWidth) {
             demon.y = boardHeight - demon.element.clientWidth
         }
@@ -52,7 +57,7 @@ const boardElement = document.getElementById("board");
 function createDemon() {
     const createNewDemon = document.createElement("div")
     createNewDemon.classList.add("demon")
-    const demon = new Demon(createNewDemon,boardElement);
+    const demon = new Demon(createNewDemon, boardElement);
     game.demonArray.push(demon)
     board.appendChild(createNewDemon);
 }
@@ -136,10 +141,68 @@ function updatePlayerPosition() {
     player.element.style.left = `${player.x}px`;
 }
 
+function checkCollision() {
+    for (let i = 0; i < game.demonArray.length; i++) {
+        const demon = game.demonArray[i];
+
+        if (
+            player.x < demon.x + demon.element.clientWidth &&
+            player.x + player.element.clientWidth > demon.x &&
+            player.y < demon.y + demon.element.clientHeight &&
+            player.y + player.element.clientHeight > demon.y
+        ) {
+            // Collision detected, remove the demon
+            demon.element.remove();
+            game.demonArray.splice(i, 1);
+            player.health -= 1; // Decrease player's health
+            updateHealthDisplay(); // Update the health display on the screen
+
+            if (player.health <= 0) {
+                // Game over condition: Player has no health left
+                game.gameover = true;
+                endGame();
+            }
+        }
+    }
+}
+
+function updateHealthDisplay() {
+    const healthElement = document.getElementById("health");
+    healthElement.textContent = `Health: ${player.health}`;
+}
+
 
 
 setInterval(updatePlayerPosition, 1000 / 60);
 // Call updatePlayerPosition in a loop to continuously update the player's position
 // 60 FPS update rate
-let animationId;
+let frames = 0;
+function animate() {
+    if (!game.gameover) {
+        setDemonPosition();
+        checkCollision();
+        frames++;
+
+        // here is where the backlog will go
+
+        animationId = requestAnimationFrame(animate);
+    }
+}
+
+function endGame() {
+    const gameBoard = document.getElementById("board");
+    gameBoard.style.display = "none"; // Hide the game board
+
+    // Display a game over message
+    const gameOverMessage = document.createElement("div");
+    gameOverMessage.textContent = "Game Over!";
+    gameOverMessage.style.color = "red";
+    gameOverMessage.style.fontSize = "36px";
+    gameOverMessage.style.textAlign = "center";
+    document.body.appendChild(gameOverMessage);
+}
+
+
+animate();
+
 
