@@ -72,3 +72,9 @@ button {
     right: 0px;
     font-size: 27px;
 }
+
+#health{
+    font-style: Garamond (serif);
+    color:red;
+    font-size: 27px;
+}
