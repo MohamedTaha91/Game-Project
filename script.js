@@ -38,6 +38,7 @@ function setDemonPosition() {
         if (demon.x <= 0) {
             demon.element.remove()
         } if (demon.y >= boardHeight - demon.element.clientWidth) {
+            demon.y = boardHeight - demon.element.clientWidth
         }
     })
 }
@@ -46,18 +47,18 @@ function setDemonPosition() {
 setInterval(setDemonPosition, 1000 / 60);
 
 
+const boardElement = document.getElementById("board");
 
 function createDemon() {
     const createNewDemon = document.createElement("div")
     createNewDemon.classList.add("demon")
-    const demon = new Demon(createNewDemon);
+    const demon = new Demon(createNewDemon,boardElement);
     game.demonArray.push(demon)
     board.appendChild(createNewDemon);
 }
 
 
 
-const boardElement = document.getElementById("board");
 
 let playerPositionX = 0;
 let playerPositionY = 0;
@@ -95,7 +96,6 @@ function updatePlayerPosition() {
         player.x = 0;
 
     } if (player.x >= boardWidth - player.element.clientWidth) {
-        console.log("this should be on right");
         player.x = boardWidth - player.element.clientWidth
     } if (player.y >= boardHeight - player.element.clientWidth) {
         player.y = boardHeight - player.element.clientWidth
@@ -134,7 +134,6 @@ function updatePlayerPosition() {
 
     player.element.style.top = `${player.y}px`;
     player.element.style.left = `${player.x}px`;
-
 }
 
 

@@ -20,9 +20,9 @@ class Player {
 }
 
 class Demon {
-    constructor(element) {
-        this.x = 390;
-        this.y = 10;
+    constructor(element, boardElement) {
+        this.x = 1000;
+        this.y = Math.floor(Math.random() * (boardElement.clientHeight - element.clientHeight - 10) + 10);
         this.velocity = 3;
         this.directionX = "left";
         this.directionY = "down";
@@ -31,7 +31,7 @@ class Demon {
 
     moveDemon() {
 
-      /*   if (this.directionY === "down") {
+    /*   if (this.directionY === "down") {
             this.y += this.velocity;
             if (this.y >= board.clientHeight - this.element.clientHeight) {
                 this.directionY = "up";
