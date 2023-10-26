@@ -1,4 +1,6 @@
 // Logic/modification for the Menu
+let mySound = new Audio("./Game-project-planning/Highscore.mp3")
+mySound.play()
 const menu = document.getElementById("menu")
 const body = document.querySelector("body")
 const game = new Game();
@@ -140,18 +142,30 @@ function updatePlayerPosition() {
     player.element.style.top = `${player.y}px`;
     player.element.style.left = `${player.x}px`;
 }
-
+function addSmoke (demon){
+    const createSmoke = document.createElement("div")
+    createSmoke.classList.add("smoke")
+    const x= demon.x
+    const y= demon.y
+    createSmoke.style.top = `${y}px`;
+    createSmoke.style.left = `${x}px`;
+    board.appendChild(createSmoke);
+    setTimeout(()=>{createSmoke.remove()},1200)
+}
 function checkCollision() {
     for (let i = 0; i < game.demonArray.length; i++) {
         const demon = game.demonArray[i];
 
         if (
-            player.x < demon.x + demon.element.clientWidth &&
+            player.x < demon.x + demon.element.clientWidth  &&
             player.x + player.element.clientWidth > demon.x &&
             player.y < demon.y + demon.element.clientHeight &&
             player.y + player.element.clientHeight > demon.y
         ) {
+
+
             // Collision detected, remove the demon
+            addSmoke(demon);
             demon.element.remove();
             game.demonArray.splice(i, 1);
             player.health -= 1; // Decrease player's health

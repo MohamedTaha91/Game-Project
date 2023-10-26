@@ -64,7 +64,8 @@ button {
     left: 1000px;
     top: 20px;
     bottom: auto;
-    background-size: 120px;
+    background-size: cover;
+    
     
 }
 
@@ -82,4 +83,12 @@ button {
     font-style: Garamond (serif);
     color:red;
     font-size: 27px;
+}
+
+.smoke{
+    background-image: url("./Game-project-planning/smoke-death-animation.gif");
+    width: 12%;
+    height: 12%;
+    position: absolute;
+    background-size: cover;
 }
