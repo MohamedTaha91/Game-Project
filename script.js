@@ -1,6 +1,6 @@
 // Logic/modification for the Menu
 let mySound = new Audio("./Game-project-planning/Highscore.mp3")
-mySound.play()
+
 const menu = document.getElementById("menu")
 const body = document.querySelector("body")
 const game = new Game();
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     startButton.addEventListener("click", function () {
+        mySound.play()
         // Hide the menu and show the game content
         setInterval(() => {
             createDemon()
@@ -167,6 +168,8 @@ function checkCollision() {
             // Collision detected, remove the demon
             addSmoke(demon);
             demon.element.remove();
+            let demonDeadSound = new Audio("./Game-project-planning/demon-dead-sound-effect.mp3")
+            demonDeadSound.play()
             game.demonArray.splice(i, 1);
             player.health -= 1; // Decrease player's health
             updateHealthDisplay(); // Update the health display on the screen
