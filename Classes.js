@@ -29,7 +29,7 @@ class Demon {
         this.directionY = "down";
         this.element = element;
     }
-
+// pending feature
     moveDemon() {
 
     /*   if (this.directionY === "down") {

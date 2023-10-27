@@ -1,4 +1,4 @@
-// Logic/modification for the Menu
+
 let mySound = new Audio("./Game-project-planning/Highscore.mp3")
 
 const menu = document.getElementById("menu")
