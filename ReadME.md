@@ -9,3 +9,5 @@
 # add level background image changes with score and increase difficulty 
 # add player / demon interaction 
 # add abilities or powerups if possible
+
+# https://docs.google.com/presentation/d/1c21qz2WrmHbwPDWE40XCZo9ONtsxTk84evLEjWqnXtw/edit?
